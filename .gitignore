@@ -1,0 +1,3 @@
+# ignorar pasta com dependencias do Node.js e nosso arquivo .env por fins de segurança
+node_modules/
+.env

@@ -1,0 +1,352 @@
+/* =========================================
+   1. VARIÁVEIS DE CORES & RESET
+   ========================================= */
+:root {
+    --cor-primaria: #1e40af;
+    --cor-secundaria: #2563eb;
+    --cor-sucesso: #16a34a; /* Verde para sobras */
+    --cor-perigo: #dc2626; /* Vermelho para faltas */
+    --cor-fundo: #f3f4f6;
+    --cor-texto: #1f2937;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+/* =========================================
+   2. O NOSSO ARSENAL (COMPONENTES BASE)
+   ========================================= */
+.card-padrao {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.btn-base {
+    border-radius: 8px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.2s;
+    cursor: pointer;
+    padding: 12px 20px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-base svg {
+    margin-top: -2px;
+    width: 20px; 
+    height: 20px;
+}
+
+/* --- Botão de lançamento --- */
+.btn-primario {
+    background-color: #003090; /* Azul do SGFS */
+    color: white;
+}
+
+.btn-primario:hover {
+    background-color: #002266; /* Fica mais escuro ao passar o mouse */
+}
+
+.btn-primario:active {
+    transform: scale(0.98); /* O botão dá uma pequena "afundada" simulando o clique! */
+}
+
+/* Modificador para o botão ocupar 100% da largura (Mobile First) */
+.btn-bloco {
+    display: block;
+    width: 100%;
+}
+
+
+
+.titulo-sessao {
+    font-size: 18px;
+    color: var(--cor-texto);
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.input-padrao{
+	width:100%;
+	border: 1px solid #ccc;
+	padding: 10px 15px;
+	border-radius: 8px;
+	outline: none;
+}
+
+.input-padrao:focus{
+	border-color: var(--cor-primaria);
+}
+
+.item-resumo {
+    display:flex;
+    align-items: center;
+    gap:15px;
+    padding: 15px;
+    cursor: pointer;
+}
+/* GAVETA DE DETALHES*/
+.item-detalhes{
+display:flex;
+justify-content: space-between;
+align-items: center;
+padding:15px;
+background-color: #f9fafb;
+border-top: 1px solid #e5e7eb;
+border-radius: 0 0 8px 8px;
+}
+.item-detalhes .data{
+    display:flex;
+    flex-direction:column;
+    gap: 4px;
+    font-size:13px;
+    color: #6b7280;
+}
+
+.item-detalhes .actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn-acao{
+    background:transparent;
+    border: none;
+    cursor:pointer;
+    padding:8px;
+    border-radius:6px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-acao:hover{ background-color: #e5e7eb;}
+.btn-editar {color: var(--cor-primaria);}
+.btn-apagar {color: var(--cor-perigo);}
+
+.oculto{
+	display:none !important; /* !important garante que quando aplicado tenha precedencia*/
+}
+/* =========================================
+   3. LAYOUT ESPECÍFICO (CABEÇALHO)
+   ========================================= */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-primaria);
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header_logo{
+text-align: center;
+}
+
+.perfil-usuario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    background-color: #1d50bd;
+}
+
+.perfil-usuario:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    background-color: #cccccc;
+    border-radius: 50%;
+}
+
+.perfil-usuario__dados { display: flex; flex-direction: column; }
+.perfil-usuario__nome { font-size: 12px; font-weight: bold; }
+.perfil-usuario__id { font-size: 12px; font-weight: bold; margin-left: 1px; }
+.perfil-usuario__loja { font-size: 14px; margin-top: 2px; color: #bfdbfe; }
+
+.campo-grupo{
+	margin-bottom: 20px;
+
+}
+.campo-label{
+	display: block;
+	font-weight: bold;
+	margin-bottom:5px;
+}
+/* =========================================
+   4. SELETOR DE FALTAS E SOBRAS (A Mágica)
+   ========================================= */
+.seletor-tipo {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.radio-custom {
+    flex: 1; /* Divide a tela 50/50 */
+}
+
+.radio-custom input {
+    display: none; /* Esconde a bolinha real */
+}
+
+/* Falso botão desmarcado (cinza neutro) */
+.btn-estado-falta, .btn-estado-sobra {
+    background-color: #e5e7eb;
+    color: #4b5563;
+}
+
+/* Quando marcado: usa as cores do nosso :root! */
+.radio-custom input[value="falta"]:checked + .btn-estado-falta {
+    background-color: var(--cor-perigo);
+    color: white;
+}
+
+.radio-custom input[value="sobra"]:checked + .btn-estado-sobra {
+    background-color: var(--cor-sucesso);
+    color: white;
+}
+
+.checkbox-alerta{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    background-color: #fcf5c0;
+    padding:15px;
+    border-radius:8px;
+    cursor:pointer;
+    border:2px solid #f2e055 ;
+}
+
+/*5.ABAS E LISTAGENS*/
+
+.cabecalho-abas{
+    display:flex;
+    border-bottom: 2px solid #e5e7eb;
+}
+.aba{
+    flex:1;
+    background:transparent;
+    border:none;
+    padding: 15px;
+    font-weight: bold;
+    color:#6b7280;
+    cursor: pointer;
+    border-bottom:3px solid transparent;
+}
+
+.aba-ativa{
+    color:var(--cor-primaria);
+    border-bottom: 3px solid var(--cor-primaria);
+}
+
+/* =========================================
+   5. INDICADORES VISUAIS (BADGES)
+   ========================================= */
+
+   .badge {
+    font-size: 12px;
+    border-radius: 9999px;
+    padding: 4px 10px;
+    font-weight: bold;
+    display: inline-block;
+   }
+
+   /* Modificadores de Cor */
+   .badge-falta{ background-color:#fee2e2; color:#991b1b; }
+   .badge-sobra{ background-color:#dcfce3; color:#166534; }
+   .badge-especial{ background-color:#fef08a; color:#854d0e; }
+
+   /* --- MODAL DE EDIÇÃO --- */
+.modal-overlay {
+    position: fixed; /* Fixa na tela toda, mesmo se rolar para baixo */
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* O fundo preto com 60% de transparência */
+    display: flex; /* Usamos o flexbox para centralizar a caixa branca no meio exato da tela */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Garante que fique por cima de tudo */
+}
+
+.modal-caixa {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 400px; /* Não deixa ficar gigante no monitor do PC */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Corta o que sobrar fora da caixa */
+}
+
+.modal-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f3f4f6;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.btn-fechar-modal {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #6b7280;
+    padding: 4px;
+    display: flex;
+    transition: color 0.2s;
+}
+
+.btn-fechar-modal:hover { color: #dc2626; } /* Fica vermelho ao passar o mouse */
+
+.modal-corpo {
+    padding: 20px;
+}
+
+.modal-rodape {
+    padding: 15px 20px;
+    border-top: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+}
+
+/* O botão verdinho que você pediu */
+.btn-confirmar-edicao {
+    background-color: #16a34a;
+    color: white;
+}
+.btn-confirmar-edicao:hover { background-color: #15803d; }
